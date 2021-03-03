@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Editor from "./Editor";
 import useLocalStorage from "../hooks/useLocalStorage";
+const test = require("decode-encode-binary");
 
 function App() {
     const [html, setHtml] = useLocalStorage("html", "");
@@ -10,6 +11,19 @@ function App() {
     const [view2, setView2] = useState("default");
     const [modal, setModal] = useState(false);
     const [tooltipStatus, setTooltipStatus] = useState(0);
+
+    useEffect(() => {
+        let search = window.location.search;
+        let params = new URLSearchParams(search);
+        let html = params.get("html");
+        let js = params.get("js");
+        let decodedHTML = "";
+        let decodedJS = "";
+        if (html.length > 10) decodedHTML = test.decode(html);
+        if (js.length > 10) decodedJS = test.decode(js);
+        decodedHTML && setHtml(decodedHTML);
+        decodedJS && setJs(decodedJS);
+    }, []);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -132,7 +146,7 @@ function App() {
                         </div>
                         <div className="flex items-stretch">
                             <div className="hidden sm:flex items-center border-l border-r px-4 border-gray-700">
-                                <div onMouseEnter={() => setTooltipStatus(3)} onMouseLeave={() => setTooltipStatus(0)} class="flex items-center">
+                                <div onMouseEnter={() => setTooltipStatus(3)} onMouseLeave={() => setTooltipStatus(0)} className="flex items-center">
                                     {tooltipStatus === 3 && (
                                         <div role="tooltip" className="z-20 absolute transition duration-150 ease-in-out   shadow-lg p-3 bg-gray-600 text-gray-600 rounded top-0 mt-14 -ml-3">
                                             <svg className="absolute top-0 -mt-2" width="16px" height="8px" viewBox="0 0 16 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
@@ -179,9 +193,9 @@ function App() {
                                     <circle cx="14" cy="14" r="14" fill="url(#paint0_linear)" />
                                     <defs>
                                         <linearGradient id="paint0_linear" x1="14" y1="0" x2="14" y2="28" gradientUnits="userSpaceOnUse">
-                                            <stop stop-color="#0EA5E9" />
-                                            <stop offset="0.5" stop-color="#6DD7B9" />
-                                            <stop offset="1" stop-color="#F0D35D" />
+                                            <stop stopColor="#0EA5E9" />
+                                            <stop offset="0.5" stopColor="#6DD7B9" />
+                                            <stop offset="1" stopColor="#F0D35D" />
                                         </linearGradient>
                                     </defs>
                                 </svg>
@@ -214,11 +228,11 @@ function App() {
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg"
                                 >
-                                    <path d="M4.66663 8.1665H23.3333" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M11.6666 12.8335V19.8335" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M16.3334 12.8335V19.8335" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M5.83337 8.1665L7.00004 22.1665C7.00004 22.7853 7.24587 23.3788 7.68346 23.8164C8.12104 24.254 8.71454 24.4998 9.33337 24.4998H18.6667C19.2855 24.4998 19.879 24.254 20.3166 23.8164C20.7542 23.3788 21 22.7853 21 22.1665L22.1667 8.1665" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M10.5 8.16667V4.66667C10.5 4.35725 10.6229 4.0605 10.8417 3.84171C11.0605 3.62292 11.3572 3.5 11.6667 3.5H16.3333C16.6428 3.5 16.9395 3.62292 17.1583 3.84171C17.3771 4.0605 17.5 4.35725 17.5 4.66667V8.16667" stroke="white" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M4.66663 8.1665H23.3333" stroke="white" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M11.6666 12.8335V19.8335" stroke="white" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M16.3334 12.8335V19.8335" stroke="white" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M5.83337 8.1665L7.00004 22.1665C7.00004 22.7853 7.24587 23.3788 7.68346 23.8164C8.12104 24.254 8.71454 24.4998 9.33337 24.4998H18.6667C19.2855 24.4998 19.879 24.254 20.3166 23.8164C20.7542 23.3788 21 22.7853 21 22.1665L22.1667 8.1665" stroke="white" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
+                                    <path d="M10.5 8.16667V4.66667C10.5 4.35725 10.6229 4.0605 10.8417 3.84171C11.0605 3.62292 11.3572 3.5 11.6667 3.5H16.3333C16.6428 3.5 16.9395 3.62292 17.1583 3.84171C17.3771 4.0605 17.5 4.35725 17.5 4.66667V8.16667" stroke="white" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round" />
                                 </svg>
                             </div>
                         </div>
