@@ -23,7 +23,7 @@ function App() {
         if (js.length > 10) decodedJS = test.decode(js);
         decodedHTML && setHtml(decodedHTML);
         decodedJS && setJs(decodedJS);
-    }, [html, js]);
+    }, [setHtml, setJs]);
 
     useEffect(() => {
         const timeout = setTimeout(() => {
