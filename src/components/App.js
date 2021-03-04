@@ -8,35 +8,106 @@ function App() {
     const [js, setJs] = useLocalStorage("js", "");
     const [srcDoc, setSrcDoc] = useState("");
     const [view1, setView1] = useState("html");
-    const [view2, setView2] = useState("default");
+    const [view2, setView2] = useLocalStorage("editorLayout", "default");
     const [modal, setModal] = useState(false);
+    const [popup, setPopup] = useState(false);
     const [tooltipStatus, setTooltipStatus] = useState(0);
+    const [editor, setEditor] = useLocalStorage("selectedFramework", "tailwind");
+    const[color,setColor]=useLocalStorage("colors",1)
 
-    useEffect(() => {
-        let search = window.location.search;
-        let params = new URLSearchParams(search);
-        let html = params.get("html");
-        let js = params.get("js");
-        let decodedHTML = "";
-        let decodedJS = "";
-        if (html.length > 10) decodedHTML = test.decode(html);
-        if (js.length > 10) decodedJS = test.decode(js);
-        decodedHTML && setHtml(decodedHTML);
-        decodedJS && setJs(decodedJS);
-    }, [setHtml, setJs]);
-
+    // useEffect(() => {
+    //     let search = window.location.search;
+    //     let params = new URLSearchParams(search);
+    //     let html = params.get("html");
+    //     let js = params.get("js");
+    //     let decodedHTML = "";
+    //     let decodedJS = "";
+    //     if (html.length > 10) decodedHTML = test.decode(html);
+    //     if (js.length > 10) decodedJS = test.decode(js);
+    //     decodedHTML && setHtml(decodedHTML);
+    //     decodedJS && setJs(decodedJS);
+    // }, [setHtml, setJs]);
+    const handleModeSwitch = () => {
+        if (editor === "tailwind") {
+            setHtml("");
+            setJs("");
+            setColor(1)
+           
+        } else if (editor === "bootstrap") {
+            setHtml("");
+            setJs("");
+            setColor(2)
+        } else if (editor === "bulma") {
+            setHtml("");
+            setJs("");
+            setColor(3)
+        }
+        else if (editor === "material") {
+            setHtml("");
+            setJs("");
+            setColor(4)
+        }
+        setPopup(!popup);
+    };
     useEffect(() => {
         const timeout = setTimeout(() => {
-            setSrcDoc(`
-        <html>
-          <body>
-          <head><link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-          </head>
-          ${html}</body>
-        
-          <script>${js}</script>
-        </html>
-      `);
+            if (editor === "tailwind") {
+                setSrcDoc(`
+            <html>
+              <body>
+              <head><link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+              </head>
+              ${html}</body>
+            
+              <script>${js}</script>
+            </html>
+          `);
+                console.log("working0", editor);
+            } else if (editor === "bootstrap") {
+                setSrcDoc(`
+            <html>
+              <body>
+              <head>
+              <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+              </head>
+              ${html}</body>
+            
+              <script>${js}
+              </script>
+              <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+              <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+              <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+            </html>
+          `);
+                console.log("working", editor);
+            } else if (editor === "bulma") {
+                setSrcDoc(`
+            <html>
+              <body>
+              <head>
+              <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+              </head>
+              ${html}</body>
+            
+              <script>${js}</script>
+            </html>
+          `);
+                console.log("working1", editor);
+            }
+            else if (editor === "material") {
+                setSrcDoc(`
+            <html>
+              <body>
+              <head>
+              <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+              </head>
+              ${html}</body>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+              <script>${js}</script>
+            </html>
+          `);
+                console.log("working1", editor);
+            }
         }, 250);
 
         return () => clearTimeout(timeout);
@@ -52,64 +123,76 @@ function App() {
                                 <img src="https://cdn.tuk.dev/doge-ui/craft/craft-logo.png" alt="logo" className="w-26 h-10" />
                             </div>
                             <div className=" border rounded border-gray-700 ml-8 flex items-center py-3 px-4">
-                                <div className="mr-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width={27} height={16} viewBox="0 0 27 16" fill="none">
-                                        <path
-                                            fillRule="evenodd"
-                                            clipRule="evenodd"
-                                            d="M6.38133 5.33333C7.25567 1.77792 9.44215 0 12.9399 0C18.1868 0 18.8427 4 21.4661 4.66667C23.2152 5.11125 24.7454 4.44458 26.0571 2.66667C25.1828 6.22208 22.9963 8 19.4985 8C14.2516 8 13.5958 4 10.9723 3.33333C9.22325 2.88875 7.69305 3.55542 6.38133 5.33333ZM0 13.3333C0.874344 9.77789 3.06082 7.99998 6.5586 7.99998C11.8055 7.99998 12.4613 12 15.0848 12.6666C16.8339 13.1112 18.3641 12.4446 19.6758 10.6666C18.8015 14.2221 16.615 16 13.1172 16C7.87032 16 7.21446 12 4.59102 11.3333C2.84192 10.8887 1.31172 11.5554 0 13.3333Z"
-                                            fill="url(#paint0_linear)"
-                                        />
-                                        <defs>
-                                            <linearGradient id="paint0_linear" x1="-36.1903" y1="-6.22208" x2="-25.6094" y2="41.6432" gradientUnits="userSpaceOnUse">
-                                                <stop stopColor="#2383AE" />
-                                                <stop offset={1} stopColor="#6DD7B9" />
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <div className="mr-4 " onMouseEnter={() => setTooltipStatus(1)} onMouseLeave={() => setTooltipStatus(0)}>
-                                    {tooltipStatus === 1 && (
-                                        <div role="tooltip" className="z-20 absolute transition duration-150 ease-in-out   shadow-lg p-3 bg-gray-600 text-gray-600 rounded  mt-7 -ml-3">
-                                            <svg className="absolute top-0 -mt-2" width="16px" height="8px" viewBox="0 0 16 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-                                                <g id="Page-1" stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
-                                                    <g id="Tooltips-" transform="translate(-93.000000, -355.000000)" fill="currentColor">
-                                                        <g id="Group-3-Copy-3" transform="translate(76.000000, 331.000000)">
-                                                            <polygon id="Triangle" transform="translate(25.000000, 28.000000) rotate(-360.000000) translate(-25.000000, -28.000000) " points="25 24 33 32 17 32" />
-                                                        </g>
-                                                    </g>
-                                                </g>
-                                            </svg>
-
-                                            <p className="text-xs font-bold text-gray-200 ">Coming Soon</p>
-                                        </div>
+                                <div
+                                    className="mr-4 text-gray-500"
+                                    onClick={() => {
+                                        setEditor("tailwind");
+                                        setPopup(!popup);
+                                    }}
+                                >
+                                    {color===1 ? (
+                                        <svg xmlns="http://www.w3.org/2000/svg" width={27} height={16} viewBox="0 0 27 16" fill="none">
+                                            <path
+                                                fillRule="evenodd"
+                                                clipRule="evenodd"
+                                                d="M6.38133 5.33333C7.25567 1.77792 9.44215 0 12.9399 0C18.1868 0 18.8427 4 21.4661 4.66667C23.2152 5.11125 24.7454 4.44458 26.0571 2.66667C25.1828 6.22208 22.9963 8 19.4985 8C14.2516 8 13.5958 4 10.9723 3.33333C9.22325 2.88875 7.69305 3.55542 6.38133 5.33333ZM0 13.3333C0.874344 9.77789 3.06082 7.99998 6.5586 7.99998C11.8055 7.99998 12.4613 12 15.0848 12.6666C16.8339 13.1112 18.3641 12.4446 19.6758 10.6666C18.8015 14.2221 16.615 16 13.1172 16C7.87032 16 7.21446 12 4.59102 11.3333C2.84192 10.8887 1.31172 11.5554 0 13.3333Z"
+                                                fill="url(#paint0_linear)"
+                                            />{" "}
+                                            <defs>
+                                                <linearGradient id="paint0_linear" x1="-36.1903" y1="-6.22208" x2="-25.6094" y2="41.6432" gradientUnits="userSpaceOnUse">
+                                                    <stop stopColor="#2383AE" />
+                                                    <stop offset={1} stopColor="#6DD7B9" />
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                    ) : (
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="cursor-pointer" width={27} height={16} viewBox="0 0 27 16" fill="none">
+                                            <path
+                                                fillRule="evenodd"
+                                                clipRule="evenodd"
+                                                d="M6.38133 5.33333C7.25567 1.77792 9.44215 0 12.9399 0C18.1868 0 18.8427 4 21.4661 4.66667C23.2152 5.11125 24.7454 4.44458 26.0571 2.66667C25.1828 6.22208 22.9963 8 19.4985 8C14.2516 8 13.5958 4 10.9723 3.33333C9.22325 2.88875 7.69305 3.55542 6.38133 5.33333ZM0 13.3333C0.874344 9.77789 3.06082 7.99998 6.5586 7.99998C11.8055 7.99998 12.4613 12 15.0848 12.6666C16.8339 13.1112 18.3641 12.4446 19.6758 10.6666C18.8015 14.2221 16.615 16 13.1172 16C7.87032 16 7.21446 12 4.59102 11.3333C2.84192 10.8887 1.31172 11.5554 0 13.3333Z"
+                                                fill="currentColor"
+                                            />{" "}
+                                        </svg>
                                     )}
+                                </div>
+
+                                <div
+                                    className={color===2  ? "mr-4 text-red-500" : "cursor-pointer mr-4 text-gray-500"}
+                                    onClick={() => {
+                                        setEditor("bootstrap");
+                                        setPopup(!popup);
+                                    }}
+                                >
                                     <svg xmlns="http://www.w3.org/2000/svg" width={16} height={16} viewBox="0 0 16 16" fill="none">
-                                        <path d="M0 13.937C0 15.0765 0.923658 16 2.06305 16H13.937C15.0765 16 16 15.0763 16 13.937V2.06305C16 0.923533 15.0763 0 13.937 0H2.06305C0.923533 0 0 0.923658 0 2.06305V13.937Z" fill="#6B7280" />
+                                        <path d="M0 13.937C0 15.0765 0.923658 16 2.06305 16H13.937C15.0765 16 16 15.0763 16 13.937V2.06305C16 0.923533 15.0763 0 13.937 0H2.06305C0.923533 0 0 0.923658 0 2.06305V13.937Z" fill="currentColor" />
                                         <path
                                             d="M6.63486 7.07738V4.81154H8.62935C8.8193 4.81154 9.00247 4.82737 9.17885 4.85903C9.35523 4.89068 9.51126 4.94722 9.64694 5.02862C9.78262 5.11003 9.89117 5.2231 9.97257 5.36782C10.054 5.51255 10.0947 5.69797 10.0947 5.92411C10.0947 6.33115 9.97258 6.62512 9.72835 6.80602C9.48413 6.98693 9.17207 7.07738 8.79217 7.07738H6.63486ZM4.5047 3.15625V12.8438H9.1992C9.63338 12.8438 10.0562 12.7895 10.4678 12.6809C10.8794 12.5724 11.2457 12.4051 11.5668 12.1789C11.8879 11.9528 12.1434 11.6611 12.3334 11.3038C12.5233 10.9465 12.6183 10.5236 12.6183 10.0352C12.6183 9.42915 12.4713 8.91131 12.1774 8.48166C11.8834 8.05201 11.4379 7.75126 10.8409 7.57939C11.2751 7.37135 11.603 7.10452 11.8246 6.77889C12.0462 6.45325 12.157 6.04622 12.157 5.55777C12.157 5.10551 12.0824 4.72561 11.9331 4.41807C11.7839 4.11053 11.5736 3.86404 11.3022 3.67862C11.0309 3.49319 10.7052 3.35977 10.3253 3.27836C9.94544 3.19695 9.52484 3.15625 9.06352 3.15625H4.5047ZM6.63486 11.1885V8.52915H8.95498C9.41629 8.52915 9.78715 8.63543 10.0676 8.848C10.348 9.06056 10.4882 9.41558 10.4882 9.91308C10.4882 10.1663 10.4452 10.3744 10.3593 10.5372C10.2733 10.7 10.158 10.8289 10.0133 10.9239C9.86855 11.0189 9.70122 11.0867 9.51127 11.1274C9.32131 11.1681 9.12232 11.1885 8.91428 11.1885H6.63486Z"
                                             fill="#111827"
                                         />
                                     </svg>
                                 </div>
-                                <div onMouseEnter={() => setTooltipStatus(2)} onMouseLeave={() => setTooltipStatus(0)}>
-                                    {tooltipStatus === 2 && (
-                                        <div role="tooltip" className="z-20 absolute transition duration-150 ease-in-out   shadow-lg p-3 bg-gray-600 text-gray-600 rounded  mt-7 -ml-3">
-                                            <svg className="absolute top-0 -mt-2" width="16px" height="8px" viewBox="0 0 16 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-                                                <g id="Page-1" stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
-                                                    <g id="Tooltips-" transform="translate(-93.000000, -355.000000)" fill="currentColor">
-                                                        <g id="Group-3-Copy-3" transform="translate(76.000000, 331.000000)">
-                                                            <polygon id="Triangle" transform="translate(25.000000, 28.000000) rotate(-360.000000) translate(-25.000000, -28.000000) " points="25 24 33 32 17 32" />
-                                                        </g>
-                                                    </g>
-                                                </g>
-                                            </svg>
-
-                                            <p className="text-xs font-bold text-gray-200 ">Coming Soon</p>
-                                        </div>
-                                    )}
+                                <div
+                                    className={color===3  ? " mr-4 bulma_color" : "cursor-pointer mr-4 text-gray-500"}
+                                    onClick={() => {
+                                        setEditor("bulma");
+                                        setPopup(!popup);
+                                    }}
+                                >
                                     <svg xmlns="http://www.w3.org/2000/svg" width={12} height={16} viewBox="0 0 12 16" fill="none">
-                                        <path d="M0 11L1.00313 4L5.01567 0L10.0313 5L7.02194 8L11.0345 12L5.01567 16L0 11Z" fill="#6B7280" />
+                                        <path d="M0 11L1.00313 4L5.01567 0L10.0313 5L7.02194 8L11.0345 12L5.01567 16L0 11Z" fill="currentColor" />
+                                    </svg>
+                                </div>
+                                <div
+                                    className={color===4  ? "materialize_color" : "cursor-pointer text-gray-500"}
+                                    onClick={() => {
+                                        setEditor("material");
+                                        setPopup(!popup);
+                                    }}
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-letter-m" width={20} height={20} viewBox="0 0 24 24" strokeWidth={3} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path d="M6 20v-16l6 14l6 -14v16" />
                                     </svg>
                                 </div>
                             </div>
@@ -239,7 +322,7 @@ function App() {
                     </div>
                 </nav>
                 <div className={view2 === "default" ? "flex-col  flex relative z-0 h-full w-full" : view2 === "col-reverse" ? "flex-col-reverse  flex relative z-0 h-full w-full" : view2 === "row" ? "flex-row  flex relative z-0 h-full w-full" : view2 === "row-reverse" ? "flex-row-reverse  flex relative z-0 h-full w-full" : ""}>
-                    <div className={view2 === "default" ? "height2 " : view2 === "col-reverse" ? "height2 " : view2 === "row" ? "view4_height w-1/2 " : view2 === "row-reverse" ? "view4_height w-1/2 " : view2 === "hidden" ? "hidden" : ""}>
+                    <div className={view2 === "default" ? "height2 " : view2 === "col-reverse" ? "height2 " : view2 === "row" ? "view4_height xl:w-1/2  w-full " : view2 === "row-reverse" ? "view4_height  xl:w-1/2  w-full " : view2 === "hidden" ? "hidden" : ""}>
                         <div className="w-full   h-full px-2 xl:px-20 bg-gray-800  ">
                             <div className="bg-gray-800  ">
                                 <div className="flex items-center justify-between border-b border-gray-700 pt-7">
@@ -276,16 +359,16 @@ function App() {
                                     <img src="https://i.ibb.co/C73Hn6L/image-1.png" alt="doge" className="pointer-events-none absolute m-auto  inset-0 z-10 h-80 w-60 " />
                                 </div>
                             ) : (
-                                <div className="xl:hidden">
-                                    <div className={view2 === "default" ? "height1" : view2 === "col-reverse" ? "height1" : view2 === "row" ? "view4_height w-1/2" : view2 === "row-reverse" ? "view4_height w-1/2" : view2 === "hidden" ? "view4_height" : ""}>
+                                <div className="xl:hidden bg-white">
+                                    <div className={view2 === "default" ? "height1 w-full" : view2 === "col-reverse" ? "height1 w-full" : view2 === "row" ? "view4_height xl:w-1/2 w-full" : view2 === "row-reverse" ? "view4_height xl:w-1/2 w-full" : view2 === "hidden" ? "view4_height" : ""}>
                                         <iframe srcDoc={srcDoc} title="output" sandbox="allow-scripts" frameBorder="0" width="100%" height="100%" />
                                     </div>
                                 </div>
                             )}
                         </div>
                     </div>
-                    <div className="hidden xl:block w-full">
-                        <div className={view2 === "default" ? "height1" : view2 === "col-reverse" ? "height1" : view2 === "row" ? "view4_height w-1/2" : view2 === "row-reverse" ? "view4_height w-1/2" : view2 === "hidden" ? "view4_height" : ""}>
+                    <div className={"hidden xl:block " + view2 === "default" ? "w-full" : view2 === "col-reverse" ? " w-full" : view2 === "row" ? "xl:w-1/2 w-full" : view2 === "row-reverse" ? "xl:w-1/2 w-full" : view2 === "hidden" ? "w-full" : ""}>
+                        <div className={view2 === "default" ? "height1 w-full" : view2 === "col-reverse" ? "height1 w-full" : view2 === "row" ? "view4_height  w-full" : view2 === "row-reverse" ? "view4_height  w-full" : view2 === "hidden" ? "view4_height" : ""}>
                             <iframe srcDoc={srcDoc} title="output" sandbox="allow-scripts" frameBorder="0" width="100%" height="100%" />
                         </div>
                     </div>
@@ -325,6 +408,25 @@ function App() {
                         </div>
                     </div>
                 </>
+            )}
+
+            {popup && (
+                <div className="absolute top-0 left-0 right-0 mt-48">
+                    <div className="flex items-center justify-center py-8 px-4">
+                        <div className="md:w-80 rounded shadow-lg p-6  dark:bg-gray-800 bg-white">
+                            <h1 className="  dark:text-gray-100 text-gray-800 font-bold text-xl">Notice</h1>
+                            <p className=" text-sm leading-5 pt-2 dark:text-gray-100 text-gray-400">All the updated code would be deleted would you like to continue?</p>
+                            <div className="sm:flex items-center justify-between   pt-6">
+                                <button className=" py-2 px-5   dark:text-gray-100 text-gray-600 focus:outline-none hover:opacity-90 text-sm font-semibold border border-gray-600 rounded" onClick={() => setPopup(!popup)}>
+                                    Cancel
+                                </button>
+                                <button className=" py-2 px-5 sm:mt-0 mt-4 text-white focus:outline-none hover:opacity-90 rounded border text-sm font-semibold border-indigo-700 bg-indigo-700" onClick={handleModeSwitch}>
+                                    Continue
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             )}
         </>
     );

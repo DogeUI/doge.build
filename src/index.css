@@ -8,7 +8,12 @@
     padding: 0;
     margin: 0;
 }
-
+.materialize_color{
+    color: #ee6e73;
+}
+.bulma_color{
+    color:#00d1b2 ;
+} 
 .widht1 {
     width: 49%;
 }
