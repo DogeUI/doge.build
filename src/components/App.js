@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Editor from "./Editor";
 import useLocalStorage from "../hooks/useLocalStorage";
-const test = require("decode-encode-binary");
 
 function App() {
     const [html, setHtml] = useLocalStorage("html", "");
@@ -13,39 +12,25 @@ function App() {
     const [popup, setPopup] = useState(false);
     const [tooltipStatus, setTooltipStatus] = useState(0);
     const [editor, setEditor] = useLocalStorage("selectedFramework", "tailwind");
-    const[color,setColor]=useLocalStorage("colors",1)
+    const [color, setColor] = useLocalStorage("colors", 1);
 
-    // useEffect(() => {
-    //     let search = window.location.search;
-    //     let params = new URLSearchParams(search);
-    //     let html = params.get("html");
-    //     let js = params.get("js");
-    //     let decodedHTML = "";
-    //     let decodedJS = "";
-    //     if (html.length > 10) decodedHTML = test.decode(html);
-    //     if (js.length > 10) decodedJS = test.decode(js);
-    //     decodedHTML && setHtml(decodedHTML);
-    //     decodedJS && setJs(decodedJS);
-    // }, [setHtml, setJs]);
     const handleModeSwitch = () => {
         if (editor === "tailwind") {
             setHtml("");
             setJs("");
-            setColor(1)
-           
+            setColor(1);
         } else if (editor === "bootstrap") {
             setHtml("");
             setJs("");
-            setColor(2)
+            setColor(2);
         } else if (editor === "bulma") {
             setHtml("");
             setJs("");
-            setColor(3)
-        }
-        else if (editor === "material") {
+            setColor(3);
+        } else if (editor === "material") {
             setHtml("");
             setJs("");
-            setColor(4)
+            setColor(4);
         }
         setPopup(!popup);
     };
@@ -93,8 +78,7 @@ function App() {
             </html>
           `);
                 console.log("working1", editor);
-            }
-            else if (editor === "material") {
+            } else if (editor === "material") {
                 setSrcDoc(`
             <html>
               <body>
@@ -130,7 +114,7 @@ function App() {
                                         setPopup(!popup);
                                     }}
                                 >
-                                    {color===1 ? (
+                                    {color === 1 ? (
                                         <svg xmlns="http://www.w3.org/2000/svg" width={27} height={16} viewBox="0 0 27 16" fill="none">
                                             <path
                                                 fillRule="evenodd"
@@ -158,7 +142,7 @@ function App() {
                                 </div>
 
                                 <div
-                                    className={color===2  ? "mr-4 text-red-500" : "cursor-pointer mr-4 text-gray-500"}
+                                    className={color === 2 ? "mr-4 text-red-500" : "cursor-pointer mr-4 text-gray-500"}
                                     onClick={() => {
                                         setEditor("bootstrap");
                                         setPopup(!popup);
@@ -173,7 +157,7 @@ function App() {
                                     </svg>
                                 </div>
                                 <div
-                                    className={color===3  ? " mr-4 bulma_color" : "cursor-pointer mr-4 text-gray-500"}
+                                    className={color === 3 ? " mr-4 bulma_color" : "cursor-pointer mr-4 text-gray-500"}
                                     onClick={() => {
                                         setEditor("bulma");
                                         setPopup(!popup);
@@ -184,7 +168,7 @@ function App() {
                                     </svg>
                                 </div>
                                 <div
-                                    className={color===4  ? "materialize_color" : "cursor-pointer text-gray-500"}
+                                    className={color === 4 ? "materialize_color" : "cursor-pointer text-gray-500"}
                                     onClick={() => {
                                         setEditor("material");
                                         setPopup(!popup);
