@@ -64,7 +64,6 @@ function App() {
               <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
             </html>
           `);
-                console.log("working", editor);
             } else if (editor === "bulma") {
                 setSrcDoc(`
             <html>
@@ -77,7 +76,6 @@ function App() {
               <script>${js}</script>
             </html>
           `);
-                console.log("working1", editor);
             } else if (editor === "material") {
                 setSrcDoc(`
             <html>
@@ -90,12 +88,11 @@ function App() {
               <script>${js}</script>
             </html>
           `);
-                console.log("working1", editor);
             }
         }, 250);
 
         return () => clearTimeout(timeout);
-    }, [html, js]);
+    }, [html, js, editor]);
 
     return (
         <>
@@ -106,7 +103,7 @@ function App() {
                             <div className="py-3 ">
                                 <img src="https://cdn.tuk.dev/doge-ui/craft/craft-logo.png" alt="logo" className="w-26 h-10" />
                             </div>
-                            <div className=" border rounded border-gray-700 ml-8 flex items-center py-3 px-4">
+                            <div className=" border rounded border-gray-700 ml-2 md:ml-8 flex items-center py-3 px-4">
                                 <div
                                     className="mr-4 text-gray-500"
                                     onClick={() => {
@@ -400,11 +397,11 @@ function App() {
                         <div className="md:w-80 rounded shadow-lg p-6  dark:bg-gray-800 bg-white">
                             <h1 className="  dark:text-gray-100 text-gray-800 font-bold text-xl">Notice</h1>
                             <p className=" text-sm leading-5 pt-2 dark:text-gray-100 text-gray-400">All the updated code would be deleted would you like to continue?</p>
-                            <div className="sm:flex items-center justify-between   pt-6">
-                                <button className=" py-2 px-5   dark:text-gray-100 text-gray-600 focus:outline-none hover:opacity-90 text-sm font-semibold border border-gray-600 rounded" onClick={() => setPopup(!popup)}>
+                            <div className="sm:flex items-center justify-end pt-6">
+                                <button className=" py-2 px-5  dark:text-gray-100 text-gray-600 focus:outline-none hover:opacity-90 text-sm font-semibold border border-gray-600 rounded" onClick={() => setPopup(!popup)}>
                                     Cancel
                                 </button>
-                                <button className=" py-2 px-5 sm:mt-0 mt-4 text-white focus:outline-none hover:opacity-90 rounded border text-sm font-semibold border-indigo-700 bg-indigo-700" onClick={handleModeSwitch}>
+                                <button className="ml-4 py-2 px-5 sm:mt-0 mt-4 text-white focus:outline-none hover:opacity-90 rounded border text-sm font-semibold border-indigo-700 bg-indigo-700" onClick={handleModeSwitch}>
                                     Continue
                                 </button>
                             </div>
