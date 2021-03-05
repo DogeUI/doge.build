@@ -348,7 +348,7 @@ function App() {
                             )}
                         </div>
                     </div>
-                    <div className={"hidden xl:block " + view2 === "default" ? "w-full" : view2 === "col-reverse" ? " w-full" : view2 === "row" ? "xl:w-1/2 w-full" : view2 === "row-reverse" ? "xl:w-1/2 w-full" : view2 === "hidden" ? "w-full" : ""}>
+                    <div className={"hidden xl:block " + view2 === "default" ? "w-full hidden xl:block" : view2 === "col-reverse" ? " w-full hidden xl:block" : view2 === "row" ? "xl:w-1/2 w-full hidden xl:block" : view2 === "row-reverse" ? "xl:w-1/2 w-full hidden xl:block" : view2 === "hidden" ? "w-full hidden xl:block" : "hidden xl:block"}>
                         <div className={view2 === "default" ? "height1 w-full" : view2 === "col-reverse" ? "height1 w-full" : view2 === "row" ? "view4_height  w-full" : view2 === "row-reverse" ? "view4_height  w-full" : view2 === "hidden" ? "view4_height" : ""}>
                             <iframe srcDoc={srcDoc} title="output" sandbox="allow-scripts" frameBorder="0" width="100%" height="100%" />
                         </div>
