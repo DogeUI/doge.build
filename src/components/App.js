@@ -14,6 +14,18 @@ function App() {
     const [editor, setEditor] = useLocalStorage("selectedFramework", "tailwind");
     const [color, setColor] = useLocalStorage("colors", 1);
 
+    useEffect(() => {
+        window.onmessage = function (e) {
+            console.log("payload", e);
+            if (e.origin !== "http://localhost:3000") {
+                return;
+            }
+            var payload = JSON.parse(e.data);
+            console.log("payload", payload);
+            localStorage.setItem(payload.key, JSON.stringify(payload.data));
+        };
+    });
+
     const handleModeSwitch = () => {
         if (editor === "tailwind") {
             setHtml("");
