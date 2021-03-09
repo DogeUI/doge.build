@@ -28,7 +28,7 @@ export default function Editor(props) {
                 plugins: [babylon],
             });
             onChange(formattedCode);
-        }, 3000);
+        }, 4000);
     }
 
     return (
