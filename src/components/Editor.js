@@ -8,7 +8,7 @@ import "codemirror/addon/edit/closetag";
 import { Controlled as ControlledEditor } from "react-codemirror2";
 
 export default function Editor(props) {
-    const { language, value, onChange, customHeight } = props;
+    const { language, value, onChange, customHeight, fontSize } = props;
 
     function handleChange(editor, data, value) {
         onChange(value);
@@ -19,7 +19,7 @@ export default function Editor(props) {
             <ControlledEditor
                 onBeforeChange={handleChange}
                 value={value}
-                className="w-full h-full"
+                className={"w-full h-full " + fontSize}
                 options={{
                     lineWrapping: true,
                     lint: true,
@@ -29,6 +29,7 @@ export default function Editor(props) {
                     matchBrackets: true,
                     autoCloseBrackets: true,
                     autoCloseTags: true,
+                    scrollbarStyle: "null",
                 }}
             />
         </div>

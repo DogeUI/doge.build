@@ -13,18 +13,7 @@ function App() {
     const [tooltipStatus, setTooltipStatus] = useState(0);
     const [editor, setEditor] = useLocalStorage("selectedFramework", "tailwind");
     const [color, setColor] = useLocalStorage("colors", 1);
-
-    useEffect(() => {
-        window.onmessage = function (e) {
-            console.log("payload", e);
-            if (e.origin !== "http://localhost:3000") {
-                return;
-            }
-            var payload = JSON.parse(e.data);
-            console.log("payload", payload);
-            localStorage.setItem(payload.key, JSON.stringify(payload.data));
-        };
-    });
+    const [fontSize, setFontSize] = useLocalStorage("editorFontSize", 14);
 
     const handleModeSwitch = () => {
         if (editor === "tailwind") {
@@ -113,7 +102,7 @@ function App() {
                     <div className="flex items-stretch justify-between ">
                         <div className="flex items-center">
                             <div className="py-3 ">
-                                <img src="https://cdn.tuk.dev/doge-ui/craft/craft-logo.png" alt="logo" className="w-26 h-10" />
+                                <img src="https://cdn.tuk.dev/doge-ui/craft/craft-logo.png" alt="logo" className="w-26 h-10 select-none" />
                             </div>
                             <div className=" border rounded border-gray-700 ml-2 md:ml-8 flex items-center py-3 px-4">
                                 <div
@@ -222,29 +211,14 @@ function App() {
                         </div>
                         <div className="flex items-stretch">
                             <div className="hidden sm:flex items-center border-l border-r px-4 border-gray-700">
-                                <div onMouseEnter={() => setTooltipStatus(3)} onMouseLeave={() => setTooltipStatus(0)} className="flex items-center">
-                                    {tooltipStatus === 3 && (
-                                        <div role="tooltip" className="z-20 absolute transition duration-150 ease-in-out   shadow-lg p-3 bg-gray-600 text-gray-600 rounded top-0 mt-14 -ml-3">
-                                            <svg className="absolute top-0 -mt-2" width="16px" height="8px" viewBox="0 0 16 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-                                                <g id="Page-1" stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
-                                                    <g id="Tooltips-" transform="translate(-93.000000, -355.000000)" fill="currentColor">
-                                                        <g id="Group-3-Copy-3" transform="translate(76.000000, 331.000000)">
-                                                            <polygon id="Triangle" transform="translate(25.000000, 28.000000) rotate(-360.000000) translate(-25.000000, -28.000000) " points="25 24 33 32 17 32" />
-                                                        </g>
-                                                    </g>
-                                                </g>
-                                            </svg>
-
-                                            <p className="text-xs font-bold text-gray-200 ">Coming Soon</p>
-                                        </div>
-                                    )}
-                                    <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <div className="flex items-center">
+                                    <svg onClick={() => fontSize !== 14 && setFontSize(fontSize - 2)} className={fontSize === 14 ? "opacity-50" : "cursor-pointer"} width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M4.16666 9.1665H15.8333V10.8332H4.16666V9.1665Z" fill="white" />
                                     </svg>
                                     <svg className="mx-2" width={24} height={24} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M10 6V21H8V6H2V4H16V6H10ZM18 14V21H16V14H13V12H21V14H18Z" fill="white" />
                                     </svg>
-                                    <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <svg onClick={() => fontSize !== 22 && setFontSize(fontSize + 2)} className={fontSize === 22 ? "opacity-50" : "cursor-pointer"} width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M9.16666 9.1665V4.1665H10.8333V9.1665H15.8333V10.8332H10.8333V15.8332H9.16666V10.8332H4.16666V9.1665H9.16666Z" fill="white" />
                                     </svg>
                                 </div>
@@ -343,12 +317,12 @@ function App() {
                             </div>
                             {view1 === "html" ? (
                                 <div className={view2 === "default" ? "w-full  pt-4  relative normal-h h-69" : view2 === "col-reverse" ? "w-full pt-4  relative normal-h h-69" : view2 === "row" ? " relative w-full pt-4 pb-12  h-94" : view2 === "row-reverse" ? "w-full relative pt-4 pb-12 view4_height  h-94" : view2 === "hidden" ? "w-full pt-4 pb-12 relative normal-h" : ""}>
-                                    <Editor customHeight={"height_viewer"} language="xml" value={html} onChange={setHtml} />
+                                    <Editor fontSize={"customFontSize" + JSON.stringify(fontSize)} customHeight={"height_viewer"} language="xml" value={html} onChange={setHtml} />
                                     <img src="https://i.ibb.co/C73Hn6L/image-1.png" alt="doge" className="pointer-events-none absolute m-auto  inset-0 z-10 h-80 w-60 " />
                                 </div>
                             ) : view1 === "js" ? (
                                 <div className={view2 === "default" ? "w-full  pt-4  relative normal-h h-69" : view2 === "col-reverse" ? "w-full pt-4  relative normal-h h-69" : view2 === "row" ? " relative w-full pt-4 pb-12  h-94" : view2 === "row-reverse" ? "w-full relative pt-4 pb-12  h-94" : view2 === "hidden" ? "w-full pt-4 pb-12 relative normal-h" : ""}>
-                                    <Editor customHeight={"height_viewer"} language="javascript" value={js} onChange={setJs} />
+                                    <Editor fontSize={"customFontSize" + JSON.stringify(fontSize)} customHeight={"height_viewer"} language="javascript" value={js} onChange={setJs} />
                                     <img src="https://i.ibb.co/C73Hn6L/image-1.png" alt="doge" className="pointer-events-none absolute m-auto  inset-0 z-10 h-80 w-60 " />
                                 </div>
                             ) : (
