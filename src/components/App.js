@@ -225,8 +225,10 @@ function App() {
                                 </div>
                             </div>
                             <div className="hidden sm:flex items-center border-r px-4 border-gray-700">
-                                {editorFontColor == "tuk" && <div onClick={() => setEditorFontColor("ayu-dark")} className="w-8 h-8 rounded-full bg-gradient-to-r from-green-500 to-blue-500 cursor-pointer" />}
-                                {editorFontColor == "ayu-dark" && <div onClick={() => setEditorFontColor("tuk")} className="w-8 h-8 rounded-full bg-gradient-to-r from-red-500 to-pink-500 cursor-pointer" />}
+                                {editorFontColor === "bespin" && <div onClick={() => setEditorFontColor("tuk")} className="w-8 h-8 rounded-full bg-gradient-to-r from-red-500 to-pink-500 cursor-pointer" />}
+                                {editorFontColor === "tuk" && <div onClick={() => setEditorFontColor("ayu-dark")} className="w-8 h-8 rounded-full bg-gradient-to-r from-red-500 to-green-300 cursor-pointer" />}
+                                {editorFontColor === "ayu-dark" && <div onClick={() => setEditorFontColor("amy")} className="w-8 h-8 rounded-full bg-gradient-to-r from-gray-400 to-gray-800 cursor-pointer" />}
+                                {editorFontColor === "amy" && <div onClick={() => setEditorFontColor("bespin")} className="w-8 h-8 rounded-full bg-gradient-to-r from-gray-400 to-green-500 cursor-pointer" />}
                             </div>
                             <div onMouseEnter={() => setTooltipStatus(5)} onMouseLeave={() => setTooltipStatus(0)} className="flex items-center sm:px-4 sm:border-r border-gray-700">
                                 {tooltipStatus === 5 && (

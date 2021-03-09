@@ -7,6 +7,8 @@ import "codemirror/addon/edit/closebrackets";
 import "codemirror/addon/edit/closetag";
 import "../themes/tuk-theme.css";
 import "../themes/ayu-dark.min.css";
+import "../themes/amy.css";
+import "../themes/bespin.css";
 
 import { Controlled as ControlledEditor } from "react-codemirror2";
 
