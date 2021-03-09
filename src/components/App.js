@@ -14,6 +14,7 @@ function App() {
     const [editor, setEditor] = useLocalStorage("selectedFramework", "tailwind");
     const [color, setColor] = useLocalStorage("colors", 1);
     const [fontSize, setFontSize] = useLocalStorage("editorFontSize", 14);
+    const [editorFontColor, setEditorFontColor] = useLocalStorage("editorFontColor", "tuk");
 
     const handleModeSwitch = () => {
         if (editor === "tailwind") {
@@ -223,32 +224,9 @@ function App() {
                                     </svg>
                                 </div>
                             </div>
-                            <div onMouseEnter={() => setTooltipStatus(4)} onMouseLeave={() => setTooltipStatus(0)} className="hidden sm:flex items-center border-r px-4 border-gray-700">
-                                {tooltipStatus === 4 && (
-                                    <div role="tooltip" className="z-20 absolute transition duration-150 ease-in-out   shadow-lg p-3 bg-gray-600 text-gray-600 rounded top-0  mt-14 -ml-3">
-                                        <svg className="absolute top-0 -mt-2" width="16px" height="8px" viewBox="0 0 16 8" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-                                            <g id="Page-1" stroke="none" strokeWidth={1} fill="none" fillRule="evenodd">
-                                                <g id="Tooltips-" transform="translate(-93.000000, -355.000000)" fill="currentColor">
-                                                    <g id="Group-3-Copy-3" transform="translate(76.000000, 331.000000)">
-                                                        <polygon id="Triangle" transform="translate(25.000000, 28.000000) rotate(-360.000000) translate(-25.000000, -28.000000) " points="25 24 33 32 17 32" />
-                                                    </g>
-                                                </g>
-                                            </g>
-                                        </svg>
-
-                                        <p className="text-xs font-bold text-gray-200 ">Coming Soon</p>
-                                    </div>
-                                )}
-                                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="14" cy="14" r="14" fill="url(#paint0_linear)" />
-                                    <defs>
-                                        <linearGradient id="paint0_linear" x1="14" y1="0" x2="14" y2="28" gradientUnits="userSpaceOnUse">
-                                            <stop stopColor="#0EA5E9" />
-                                            <stop offset="0.5" stopColor="#6DD7B9" />
-                                            <stop offset="1" stopColor="#F0D35D" />
-                                        </linearGradient>
-                                    </defs>
-                                </svg>
+                            <div className="hidden sm:flex items-center border-r px-4 border-gray-700">
+                                {editorFontColor == "tuk" && <div onClick={() => setEditorFontColor("ayu-dark")} className="w-8 h-8 rounded-full bg-gradient-to-r from-green-500 to-blue-500 cursor-pointer" />}
+                                {editorFontColor == "ayu-dark" && <div onClick={() => setEditorFontColor("tuk")} className="w-8 h-8 rounded-full bg-gradient-to-r from-red-500 to-pink-500 cursor-pointer" />}
                             </div>
                             <div onMouseEnter={() => setTooltipStatus(5)} onMouseLeave={() => setTooltipStatus(0)} className="flex items-center sm:px-4 sm:border-r border-gray-700">
                                 {tooltipStatus === 5 && (
@@ -317,12 +295,12 @@ function App() {
                             </div>
                             {view1 === "html" ? (
                                 <div className={view2 === "default" ? "w-full  pt-4  relative normal-h h-69" : view2 === "col-reverse" ? "w-full pt-4  relative normal-h h-69" : view2 === "row" ? " relative w-full pt-4 pb-12  h-94" : view2 === "row-reverse" ? "w-full relative pt-4 pb-12 view4_height  h-94" : view2 === "hidden" ? "w-full pt-4 pb-12 relative normal-h" : ""}>
-                                    <Editor fontSize={"customFontSize" + JSON.stringify(fontSize)} customHeight={"height_viewer"} language="xml" value={html} onChange={setHtml} />
+                                    <Editor editorFontColor={editorFontColor} fontSize={"customFontSize" + JSON.stringify(fontSize)} customHeight={"height_viewer"} language="xml" value={html} onChange={setHtml} />
                                     <img src="https://i.ibb.co/C73Hn6L/image-1.png" alt="doge" className="pointer-events-none absolute m-auto  inset-0 z-10 h-80 w-60 " />
                                 </div>
                             ) : view1 === "js" ? (
                                 <div className={view2 === "default" ? "w-full  pt-4  relative normal-h h-69" : view2 === "col-reverse" ? "w-full pt-4  relative normal-h h-69" : view2 === "row" ? " relative w-full pt-4 pb-12  h-94" : view2 === "row-reverse" ? "w-full relative pt-4 pb-12  h-94" : view2 === "hidden" ? "w-full pt-4 pb-12 relative normal-h" : ""}>
-                                    <Editor fontSize={"customFontSize" + JSON.stringify(fontSize)} customHeight={"height_viewer"} language="javascript" value={js} onChange={setJs} />
+                                    <Editor editorFontColor={editorFontColor} fontSize={"customFontSize" + JSON.stringify(fontSize)} customHeight={"height_viewer"} language="javascript" value={js} onChange={setJs} />
                                     <img src="https://i.ibb.co/C73Hn6L/image-1.png" alt="doge" className="pointer-events-none absolute m-auto  inset-0 z-10 h-80 w-60 " />
                                 </div>
                             ) : (
