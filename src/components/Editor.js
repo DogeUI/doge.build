@@ -1,4 +1,6 @@
 import React from "react";
+import prettier from "prettier/standalone";
+import babylon from "prettier/parser-babel";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import "codemirror/mode/xml/xml";
@@ -17,8 +19,17 @@ export default function Editor(props) {
 
     function handleChange(editor, data, value) {
         onChange(value);
+        setTimeout(() => {
+            const formattedCode = prettier.format(value, {
+                tabWidth: 4,
+                printWidth: 600,
+                parser: "babel",
+                plugins: [babylon],
+            });
+            onChange(formattedCode);
+        }, 3000);
     }
-    console.log("check this", editorFontColor);
+
     return (
         <div className={customHeight}>
             <ControlledEditor
