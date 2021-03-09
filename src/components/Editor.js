@@ -5,6 +5,7 @@ import "codemirror/lib/codemirror.css";
 import "codemirror/theme/material.css";
 import "codemirror/mode/xml/xml";
 import "codemirror/mode/javascript/javascript";
+import "codemirror/addon/lint/javascript-lint";
 import "codemirror/addon/edit/closebrackets";
 import "codemirror/addon/edit/closetag";
 import "../themes/tuk-theme.css";
