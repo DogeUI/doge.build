@@ -6,6 +6,7 @@
         "@testing-library/react": "^9.5.0",
         "@testing-library/user-event": "^7.2.1",
         "codemirror": "^5.57.0",
+        "js-beautify": "^1.13.5",
         "prettier": "^2.2.1",
         "react": "^16.13.1",
         "react-codemirror2": "^7.2.1",

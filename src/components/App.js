@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Editor from "./Editor";
 import useLocalStorage from "../hooks/useLocalStorage";
+import prettier from "prettier/standalone";
+import babylon from "prettier/parser-babel";
 
 function App() {
     const [html, setHtml] = useLocalStorage("html", "");
@@ -36,6 +38,49 @@ function App() {
         }
         setPopup(!popup);
     };
+
+    const formatCode = () => {
+        let flag = true;
+        let formattedCode = "";
+        if (view1 === "html") {
+            try {
+                setHtml(html);
+                formattedCode = prettier.format(html, {
+                    tabWidth: 4,
+                    printWidth: 600,
+                    parser: "babel",
+                    plugins: [babylon],
+                });
+            } catch (err) {
+                flag = false;
+                return flag;
+            }
+            if (flag) {
+                setHtml(formattedCode);
+            } else {
+                setHtml(html);
+            }
+        } else {
+            try {
+                setJs(js);
+                formattedCode = prettier.format(js, {
+                    tabWidth: 4,
+                    printWidth: 600,
+                    parser: "babel",
+                    plugins: [babylon],
+                });
+            } catch (err) {
+                flag = false;
+                return flag;
+            }
+            if (flag) {
+                setJs(formattedCode);
+            } else {
+                setJs(js);
+            }
+        }
+    };
+
     useEffect(() => {
         const timeout = setTimeout(() => {
             if (editor === "tailwind") {
@@ -292,17 +337,27 @@ function App() {
                                             <div className={view1 === "preview" ? " w-16 h-1 mt-3 bg-blue-500 " : "w-16 h-1 mt-3"} />
                                         </button>
                                     </div>
-                                    <div className="flex items-center"></div>
+                                    <div className="flex items-center">
+                                        <button onClick={() => formatCode()} className=" py-1 px-1 rounded-lg text-blue-500 bg-transparent text-sm focus:outline-none hover:bg-gray-600 flex items-center">
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-code mr-3" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <polyline points="7 8 3 12 7 16" />
+                                                <polyline points="17 8 21 12 17 16" />
+                                                <line x1={14} y1={4} x2={10} y2={20} />
+                                            </svg>
+                                            Format Code
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                             {view1 === "html" ? (
                                 <div className={view2 === "default" ? "w-full  pt-4  relative normal-h h-69" : view2 === "col-reverse" ? "w-full pt-4  relative normal-h h-69" : view2 === "row" ? " relative w-full pt-4 pb-12  h-94" : view2 === "row-reverse" ? "w-full relative pt-4 pb-12 view4_height  h-94" : view2 === "hidden" ? "w-full pt-4 pb-12 relative normal-h" : ""}>
-                                    <Editor editorFontColor={editorFontColor} fontSize={"customFontSize" + JSON.stringify(fontSize)} customHeight={"height_viewer"} language="xml" value={html} onSaveData={setHtml} />
+                                    <Editor formatCode={formatCode} editorFontColor={editorFontColor} fontSize={"customFontSize" + JSON.stringify(fontSize)} customHeight={"height_viewer"} language="xml" value={html} onSaveData={setHtml} />
                                     <img src="https://i.ibb.co/C73Hn6L/image-1.png" alt="doge" className="pointer-events-none absolute m-auto  inset-0 z-10 h-80 w-60 " />
                                 </div>
                             ) : view1 === "js" ? (
                                 <div className={view2 === "default" ? "w-full  pt-4  relative normal-h h-69" : view2 === "col-reverse" ? "w-full pt-4  relative normal-h h-69" : view2 === "row" ? " relative w-full pt-4 pb-12  h-94" : view2 === "row-reverse" ? "w-full relative pt-4 pb-12  h-94" : view2 === "hidden" ? "w-full pt-4 pb-12 relative normal-h" : ""}>
-                                    <Editor editorFontColor={editorFontColor} fontSize={"customFontSize" + JSON.stringify(fontSize)} customHeight={"height_viewer"} language="javascript" value={js} onSaveData={setJs} />
+                                    <Editor formatCode={formatCode} editorFontColor={editorFontColor} fontSize={"customFontSize" + JSON.stringify(fontSize)} customHeight={"height_viewer"} language="javascript" value={js} onSaveData={setJs} />
                                     <img src="https://i.ibb.co/C73Hn6L/image-1.png" alt="doge" className="pointer-events-none absolute m-auto  inset-0 z-10 h-80 w-60 " />
                                 </div>
                             ) : (
@@ -356,7 +411,6 @@ function App() {
                     </div>
                 </>
             )}
-
             {popup && (
                 <div className="absolute top-0 left-0 right-0 mt-48">
                     <div className="flex items-center justify-center py-8 px-4">
