@@ -13,7 +13,7 @@ import "../themes/bespin.css";
 import { Controlled as ControlledEditor } from "react-codemirror2";
 
 export default function Editor(props) {
-    const { language, value, onSaveData, customHeight, fontSize, editorFontColor, formatCode } = props;
+    const { language, value, onSaveData, customHeight, fontSize, editorFontColor } = props;
 
     function handleChange(editor, data, value) {
         onSaveData(value);
