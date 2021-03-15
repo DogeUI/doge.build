@@ -337,7 +337,8 @@ function App() {
                                             <div className={view1 === "preview" ? " w-16 h-1 mt-3 bg-blue-500 " : "w-16 h-1 mt-3"} />
                                         </button>
                                     </div>
-                                    <div className="flex items-center">
+                                    {/* format code */}
+                                    <div className="flex items-center hidden">
                                         <button onClick={() => formatCode()} className=" py-1 px-1 rounded-lg text-blue-500 bg-transparent text-sm focus:outline-none hover:bg-gray-600 flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-code mr-3" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -348,6 +349,7 @@ function App() {
                                             Format Code
                                         </button>
                                     </div>
+                                    {/* format code */}
                                 </div>
                             </div>
                             {view1 === "html" ? (
