@@ -339,7 +339,7 @@ function App() {
                                         </button>
                                     </div>
                                     {/* format code */}
-                                    <div className="hidden flex items-center ">
+                                    <div className="flex items-center ">
                                         <button onClick={() => formatCode()} className=" py-1 px-1 rounded-lg text-blue-500 bg-transparent text-sm focus:outline-none hover:bg-gray-600 flex items-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-code mr-3" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
