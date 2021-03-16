@@ -7,7 +7,6 @@
         "@testing-library/user-event": "^7.2.1",
         "codemirror": "^5.57.0",
         "js-beautify": "^1.13.5",
-        "prettier": "^2.2.1",
         "react": "^16.13.1",
         "react-codemirror2": "^7.2.1",
         "react-dom": "^16.13.1",
@@ -35,8 +34,10 @@
         ]
     },
     "devDependencies": {
+        "@prettier/plugin-xml": "^0.13.1",
         "autoprefixer": "^9.8.6",
         "postcss-cli": "^8.3.1",
+        "prettier": "^2.2.1",
         "tailwindcss": "^2.0.3"
     }
 }
