@@ -3,7 +3,6 @@ import Editor from "./Editor";
 import useLocalStorage from "../hooks/useLocalStorage";
 import prettier from "prettier/standalone";
 import babylon from "prettier/parser-babel";
-import xml from "prettier/parser-html";
 
 function App() {
     const [html, setHtml] = useLocalStorage("html", "");
@@ -43,21 +42,22 @@ function App() {
     const formatCode = () => {
         let flag = true;
         let formattedCode = "";
+
+        let formattedXml = "";
+        var format = require("xml-formatter");
         if (view1 === "html") {
             try {
                 setHtml(html);
-                formattedCode = prettier.format(html, {
+                formattedXml = format(html, {
                     tabWidth: 4,
                     printWidth: 600,
-                    parser: "html",
-                    plugins: [xml],
                 });
             } catch (err) {
                 flag = false;
                 return flag;
             }
             if (flag) {
-                setHtml(formattedCode);
+                setHtml(formattedXml);
             } else {
                 setHtml(html);
             }
