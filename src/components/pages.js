@@ -1,9 +1,7 @@
 import React from "react";
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
-    Redirect
 } from "react-router-dom";
 import App from './App'
 import Eccom from './eccomerce-kit'
@@ -15,7 +13,7 @@ export default function Pages() {
       <Route path="/"  exact>
           <App/>
       </Route>
-      <Route path="/eccomerce-ui-kit" >
+      <Route path="/ecomerce-ui-kit" >
           <Eccom/>
       </Route>
     </Router>

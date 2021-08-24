@@ -81,12 +81,10 @@ function App() {
     if (editor === "tailwind") {
       setHtml(htmlCode);
     }
-  }, []);
+  }, [editor,setHtml]);
 
   const handleModeSwitch = () => {
     if (editor === "tailwind") {
-      
-
       setHtml("");
       setJs("");
       setColor(1);
