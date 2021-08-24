@@ -13,7 +13,7 @@ export default function Pages() {
       <Route path="/"  exact>
           <App/>
       </Route>
-      <Route path="/ecomerce-ui-kit" >
+      <Route path="/ecommerce-ui-kit" >
           <Eccom/>
       </Route>
     </Router>
