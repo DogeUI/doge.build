@@ -3,6 +3,7 @@ import Editor from "./Editor";
 import useLocalStorage from "../hooks/useLocalStorage";
 import prettier from "prettier/standalone";
 import babylon from "prettier/parser-babel";
+import splitbee from "@splitbee/web";
 
 
 function App() {
@@ -18,22 +19,37 @@ function App() {
   const [color, setColor] = useLocalStorage("colors", 1);
   const [fontSize, setFontSize] = useLocalStorage("editorFontSize", 14);
   const [editorFontColor, setEditorFontColor] = useLocalStorage("editorFontColor", "tuk");
- 
+
+  splitbee.init();
   const handleModeSwitch = () => {
-   
+    splitbee.track("Feature", {
+      type: "CSS Framework",
+    });
     if (editor === "tailwind") {
+      splitbee.track("CSS Framework", {
+        type: "Tailwindcss",
+      });
       setHtml("");
       setJs("");
       setColor(1);
     } else if (editor === "bootstrap") {
+      splitbee.track("CSS Framework", {
+        type: "Bootstrap",
+      });
       setHtml("");
       setJs("");
       setColor(2);
     } else if (editor === "bulma") {
+      splitbee.track("CSS Framework", {
+        type: "Bulma",
+      });
       setHtml("");
       setJs("");
       setColor(3);
     } else if (editor === "material") {
+      splitbee.track("CSS Framework", {
+        type: "Material UI",
+      });
       setHtml("");
       setJs("");
       setColor(4);
