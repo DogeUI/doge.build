@@ -19,14 +19,13 @@ function App() {
   const [editorFontColor, setEditorFontColor] = useLocalStorage("editorFontColor", "tuk");
 
   useEffect(() => {
-    let htmlCode = `
-    <!-- Naviagtion -->
-
+    let htmlCode = `   <!-- Naviagtion -->
     <div class="dark:bg-gray-900">
       <div>
         <div class="relative">
           <!-- For md screen size -->
-          <div id="md-searchbar" class="bg-white dark:bg-gray-900 hidden lg:hidden py-5 px-6 items-center justify-between">
+          <div id="md-searchbar" class="bg-white dark:bg-gray-900 hidden lg:hidden py-5  items-center justify-between">
+           <div class="mx-auto container px-4 flex itesm-center justify-between">
             <div class="flex items-center space-x-3 text-gray-800 dark:text-white">
               <div>
                 <svg class="fill-stroke" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -56,12 +55,12 @@ function App() {
                 </svg>
               </button>
             </div>
+           </div>
           </div>
           <!-- For md screen size -->
-
           <!-- For large screens -->
-          <div class="dark:bg-gray-900 bg-gray-50 px-6 py-9">
-            <div class="container mx-auto flex items-center justify-between">
+          <div class="dark:bg-gray-900 bg-gray-50  py-9">
+            <div class="container mx-auto flex items-center justify-between px-4">
               <h1 class="md:w-2/12 cursor-pointer text-gray-800 dark:text-white" aria-label="the Crib.">
                 <svg class="fill-stroke" width="93" height="19" viewBox="0 0 93 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -88,7 +87,6 @@ function App() {
                   <a href="javascript:void(0)" class="dark:text-white text-base text-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-800 hover:underline">Support</a>
                 </li>
               </ul>
-
               <div class="md:w-2/12 justify-end flex items-center space-x-4 xl:space-x-8">
                 <div class="hidden lg:flex items-center">
                   <button onclick="toggleSearch()" aria-label="search items" class="text-gray-800 dark:hover:text-gray-300 dark:text-white focus:outline-none focus:ring-2 focus:ring-gray-800">
@@ -119,7 +117,6 @@ function App() {
                     </svg>
                   </button>
                 </div>
-
                 <div class="flex lg:hidden">
                   <button aria-label="show options" onclick="mdOptionsToggle()" class="text-black dark:text-white dark:hover:text-gray-300 hidden md:flex focus:outline-none focus:ring-2 rounded focus:ring-gray-600">
                     <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -240,12 +237,10 @@ function App() {
         </div>
       </div>
     </div>
-
     <!-- Naviagtion -->
     <!-- hero II -->
-
-    <div class="dark:bg-gray-900 lg:px-0 px-4">
-      <div class="container mx-auto py-9 md:py-12 lg:py-24">
+    <div class="dark:bg-gray-900  ">
+      <div class="container mx-auto px-4 py-9 md:py-12 lg:py-24">
         <div class="flex flex-col lg:flex-row justify-center items-strech">
           <div class="lg:w-4/12 flex justify-center items-center">
             <div>
@@ -257,7 +252,7 @@ function App() {
             <div class="relative w-full h-full">
               <img src="https://i.ibb.co/gmV2mLr/pexels-maksim-goncharenok-4352247-1-1-1.png" alt="A lounge sofa" role="img" class="w-full h-full relative hidden lg:block" />
               <img src="https://i.ibb.co/Mhgkt2f/pexels-maksim-goncharenok-4352247-1-1-1.png" alt="A lounge sofa" role="img" class="w-full h-full lg:hidden" />
-              <div class="hidden lg:block absolute bottom-0 right-0 bg-red-200 w-1/2">
+              <div class="hidden md:block absolute bottom-0 right-0 bg-red-200 w-1/2">
                 <button class="dark:hover:bg-gray-800 dark:bg-white dark:hover:text-gray-50 dark:text-gray-800 bg-gray-800 text-xl xl:text-2xl font-medium text-white flex justify-between w-full items-center p-5 xl:p-6 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-700">
                   Discover More
                   <div>
@@ -270,7 +265,7 @@ function App() {
                 </button>
               </div>
             </div>
-            <div class="mt-6 md:mt-8 lg:hidden">
+            <div class="mt-6 md:mt-8 md:hidden">
               <button class="dark:hover:bg-gray-800 dark:bg-white dark:hover:text-gray-50 dark:text-gray-800 bg-gray-800 text-base md:text-xl font-semibold leading-tight text-white flex justify-between items-center px-5 py-4 lg:py-7 lg:px-7 w-full md:w-5/12 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-700">
                 Discover More
                 <div>
@@ -293,137 +288,132 @@ function App() {
         </div>
       </div>
     </div>
-
     <!-- hero II -->
     <!-- Best Seller 1-->
-
-    <div class="2xl:container 2xl:mx-auto">
-      <div class="lg:px-0 md:px-6 px-4 md:py-12 py-8">
-        <div>
-          <h1 class="text-3xl lg:text-4xl font-semibold text-gray-800 text-center">Top Selling</h1>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-8 md:mt-10">
-          <div class="bg-gray-50 p-8">
-            <div class="">
-              <h2 class="text-xl text-gray-600">Lounge Chair</h2>
-              <p class="text-xl font-semibold text-gray-800 mt-2">$1200</p>
-            </div>
-            <div class="flex justify-center items-center mt-8 md:mt-24">
-              <img class="" src="https://i.ibb.co/8403ZFZ/pexels-hormel-2762247-removebg-preview-2-1.png" alt="A chair with designed back" role="img" />
-            </div>
-            <div class="flex justify-end items-center space-x-2 mt-16 md:mt-32">
-              <button aria-label="show in red color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="5" cy="5" r="4.75" fill="#DC2626" stroke="#6B7280" stroke-width="0.5" />
-                </svg>
-              </button>
-              <button aria-label="show in white color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="5" cy="5" r="4.75" fill="white" stroke="#6B7280" stroke-width="0.5" />
-                </svg>
-              </button>
-              <button aria-label="show in black color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="5" cy="5" r="4.75" fill="#111827" stroke="#6B7280" stroke-width="0.5" />
-                </svg>
-              </button>
-            </div>
+    <div class=" mx-auto container">
+      <div class=" px-4 md:py-12 py-8">
+          <div>
+              <h1 class="text-3xl lg:text-4xl font-semibold text-gray-800 text-center">Top Selling </h1>
           </div>
-          <div class="bg-gray-50 p-8">
-            <div class="">
-              <h2 class="text-xl text-gray-600">Lounge Chair</h2>
-              <p class="text-xl font-semibold text-gray-800 mt-2">$1200</p>
-            </div>
-            <div class="flex justify-center items-center mt-8 md:mt-24">
-              <img class="" src="https://i.ibb.co/WBdnRqb/eugene-chystiakov-3ne-Swyntb-Q8-unsplash-1-removebg-preview-2-1.png" alt="A chair with wooden legs" role="img" />
-            </div>
-            <div class="flex justify-end items-center space-x-2 mt-8 md:mt-24">
-              <button aria-label="show in white color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="5" cy="5" r="4.75" fill="white" stroke="#6B7280" stroke-width="0.5" />
-                </svg>
-              </button>
-              <button aria-label="show in black color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="5" cy="5" r="4.75" fill="#111827" stroke="#6B7280" stroke-width="0.5" />
-                </svg>
-              </button>
-            </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mt-8 md:mt-10" >
+              <div class="bg-gray-50 p-8">
+                  <div class="">
+                      <h2 class="text-xl text-gray-600">Lounge Chair</h2>
+                      <p class="text-xl font-semibold  text-gray-800 mt-2">$1200</p>
+                  </div>
+                  <div class="flex justify-center items-center mt-8 md:mt-24">
+                      <img class="" src="https://i.ibb.co/8403ZFZ/pexels-hormel-2762247-removebg-preview-2-1.png" alt="A chair with designed back" role="img">
+                  </div>
+                  <div class="flex justify-end items-center space-x-2 mt-16 md:mt-32">
+                      <button aria-label="show in red color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded" >
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="5" cy="5" r="4.75" fill="#DC2626" stroke="#6B7280" stroke-width="0.5"/>
+                          </svg>    
+                      </button>
+                      <button aria-label="show in white color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="5" cy="5" r="4.75" fill="white" stroke="#6B7280" stroke-width="0.5"/>
+                          </svg>    
+                      </button>
+                      <button aria-label="show in black color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="5" cy="5" r="4.75" fill="#111827" stroke="#6B7280" stroke-width="0.5"/>
+                          </svg>                              
+                      </button>
+                  </div>
+              </div>
+              <div class="bg-gray-50 p-8">
+                  <div class="">
+                      <h2 class="text-xl text-gray-600">Lounge Chair</h2>
+                      <p class="text-xl font-semibold  text-gray-800 mt-2">$1200</p>
+                  </div>
+                  <div class="flex justify-center items-center mt-8 md:mt-24">
+                      <img class="" src="https://i.ibb.co/WBdnRqb/eugene-chystiakov-3ne-Swyntb-Q8-unsplash-1-removebg-preview-2-1.png" alt="A chair with wooden legs" role="img">
+                  </div>
+                  <div class="flex justify-end items-center space-x-2 mt-8 md:mt-24">
+                      <button aria-label="show in white color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded" >
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="5" cy="5" r="4.75" fill="white" stroke="#6B7280" stroke-width="0.5"/>
+                          </svg>    
+                      </button>
+                      <button aria-label="show in black color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="5" cy="5" r="4.75" fill="#111827" stroke="#6B7280" stroke-width="0.5"/>
+                          </svg>                              
+                      </button>
+                  </div>
+              </div>
+              <div class="bg-gray-50 p-8 lg:col-start-auto md:col-start-1 col-start-auto  md:col-end-3 col-end-auto lg:col-end-auto">
+                  <div class="">
+                      <h2 class="text-xl text-gray-600">Lounge Chair</h2>
+                      <p class="text-xl font-semibold  text-gray-800 mt-2">$1200</p>
+                  </div>
+                  <div class="flex justify-center items-center mt-8 md:mt-24">
+                      <img class="" src="https://i.ibb.co/R2fbCvj/kari-shea-It-Mgg-D0-Egu-Y-unsplash-removebg-preview-2-1.png" alt="A sofa chair with wooden legs" role="img">
+                  </div>
+                  <div class="flex justify-end items-center space-x-2 mt-16 md:mt-32">
+                      <button aria-label="show in green color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="5" cy="5" r="4.75" fill="#047857" stroke="#6B7280" stroke-width="0.5"/>
+                          </svg>                        
+                      </button>
+                      <button aria-label="show in brown color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="5" cy="5" r="4.75" fill="#92400E" stroke="#6B7280" stroke-width="0.5"/>
+                          </svg>                              
+                      </button>
+                  </div>
+              </div>
           </div>
-          <div class="bg-gray-50 p-8">
-            <div class="">
-              <h2 class="text-xl text-gray-600">Lounge Chair</h2>
-              <p class="text-xl font-semibold text-gray-800 mt-2">$1200</p>
-            </div>
-            <div class="flex justify-center items-center mt-8 md:mt-24">
-              <img class="" src="https://i.ibb.co/R2fbCvj/kari-shea-It-Mgg-D0-Egu-Y-unsplash-removebg-preview-2-1.png" alt="A sofa chair with wooden legs" role="img" />
-            </div>
-            <div class="flex justify-end items-center space-x-2 mt-16 md:mt-32">
-              <button aria-label="show in green color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="5" cy="5" r="4.75" fill="#047857" stroke="#6B7280" stroke-width="0.5" />
-                </svg>
-              </button>
-              <button aria-label="show in brown color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="5" cy="5" r="4.75" fill="#92400E" stroke="#6B7280" stroke-width="0.5" />
-                </svg>
-              </button>
-            </div>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6 lg:gap-8 mt-4 md:mt-6 lg:mt-8" >
+              <div class="bg-gray-50 p-8">
+                  <div>
+                      <h2 class="text-xl leading-tight text-gray-600">Sectional Sofa</h2>
+                      <p class="text-xl font-semibold text-gray-800 mt-2">$78900</p>
+                  </div>
+                  <div class="flex justify-center items-center mt-28 md:mt-3">
+                      <img src="https://i.ibb.co/CPdBFwZ/pexels-pixabay-276583-removebg-preview-1-1.png" alt="A large sectional sofa" role="img">
+                  </div>
+                  <div class="flex justify-end items-center space-x-2 mt-36 md:mt-12">
+                      <button aria-label="show in yellow color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="5" cy="5" r="4.75" fill="#F59E0B" stroke="#6B7280" stroke-width="0.5"/>
+                          </svg>                           
+                      </button>
+                      <button aria-label="show in light gray color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="5" cy="5" r="4.75" fill="#9CA3AF" stroke="#6B7280" stroke-width="0.5"/>
+                          </svg>                            
+                      </button>
+                  </div>
+              </div>
+              <div class="bg-gray-50 p-8">
+                  <div>
+                      <h2 class="text-xl leading-tight text-gray-600">Two Seater Sofa</h2>
+                      <p class="text-xl font-semibold text-gray-800 mt-2">$2900</p>
+                  </div>
+                  <div class="flex justify-center items-center mt-28 md:mt-1">
+                      <img src="https://i.ibb.co/238nZzf/pexels-andrea-piacquadio-3757055-removebg-preview-1-1.png" alt="A beautiful two seater sofa" role="img">
+                  </div>
+                  <div class="flex justify-end items-center space-x-2 mt-36 md:mt-12">
+                      <button aria-label="show in black color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="5" cy="5" r="4.75" fill="#111827" stroke="#6B7280" stroke-width="0.5"/>
+                          </svg>                            
+                      </button>
+                      <button aria-label="show in green color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
+                          <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <circle cx="5" cy="5" r="4.75" fill="#047857" stroke="#6B7280" stroke-width="0.5"/>
+                          </svg>                                                           
+                      </button>
+                  </div>
+              </div>
           </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-6 lg:gap-8 mt-4 md:mt-6 lg:mt-8">
-          <div class="bg-gray-50 p-8">
-            <div>
-              <h2 class="text-xl leading-tight text-gray-600">Sectional Sofa</h2>
-              <p class="text-xl font-semibold text-gray-800 mt-2">$78900</p>
-            </div>
-            <div class="flex justify-center items-center mt-28 md:mt-3">
-              <img src="https://i.ibb.co/CPdBFwZ/pexels-pixabay-276583-removebg-preview-1-1.png" alt="A large sectional sofa" role="img" />
-            </div>
-            <div class="flex justify-end items-center space-x-2 mt-36 md:mt-12">
-              <button aria-label="show in yellow color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="5" cy="5" r="4.75" fill="#F59E0B" stroke="#6B7280" stroke-width="0.5" />
-                </svg>
-              </button>
-              <button aria-label="show in light gray color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="5" cy="5" r="4.75" fill="#9CA3AF" stroke="#6B7280" stroke-width="0.5" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          <div class="bg-gray-50 p-8">
-            <div>
-              <h2 class="text-xl leading-tight text-gray-600">Two Seater Sofa</h2>
-              <p class="text-xl font-semibold text-gray-800 mt-2">$2900</p>
-            </div>
-            <div class="flex justify-center items-center mt-28 md:mt-1">
-              <img src="https://i.ibb.co/238nZzf/pexels-andrea-piacquadio-3757055-removebg-preview-1-1.png" alt="A beautiful two seater sofa" role="img" />
-            </div>
-            <div class="flex justify-end items-center space-x-2 mt-36 md:mt-12">
-              <button aria-label="show in black color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="5" cy="5" r="4.75" fill="#111827" stroke="#6B7280" stroke-width="0.5" />
-                </svg>
-              </button>
-              <button aria-label="show in green color" class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 rounded">
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="5" cy="5" r="4.75" fill="#047857" stroke="#6B7280" stroke-width="0.5" />
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
-    </div>
-
+  </div>
     <!-- Best Seller 1-->
     <!-- CTA IV-->
-
-    <div class="mx-auto container flex flex-col lg:flex-row justify-center items-center lg:space-x-8 lg:px-0 px-4">
+    <div class="mx-auto container flex flex-col lg:flex-row justify-center items-center lg:space-x-8  px-4">
       <div class="relative lg:w-1/2 w-full">
         <img class="hidden lg:block w-full" src="https://i.ibb.co/XXKZ7Pt/Group-1785.png" alt="table-chair" />
         <img class="hidden sm:block lg:hidden w-full" src="https://i.ibb.co/KK7Vn9n/Group-1785-1.png" alt="table-chair" />
@@ -447,7 +437,6 @@ function App() {
           </div>
         </div>
       </div>
-
       <div class="relative lg:w-1/2 w-full lg:mt-0 mt-8">
         <img class="hidden lg:block w-full" src="https://i.ibb.co/0qHj658/Group-1786.png" alt="chair-wood-fire" />
         <img class="hidden sm:block lg:hidden w-full" src="https://i.ibb.co/mGM3xtB/Group-1786-1.png" alt="chair-wood-fire" />
@@ -472,11 +461,9 @@ function App() {
         </div>
       </div>
     </div>
-
     <!-- CTA IV-->
     <!-- CTA II-->
-
-    <div class="2xl:mx-auto 2xl:container lg:px-0 md:px-6 px-4 md:py-12 py-8 flex justify-center items-center">
+    <div class="mx-auto container   px-4 md:py-12 py-8 flex justify-center items-center">
       <div class="w-full flex flex-col justify-center items-center">
         <div class="w-full relative">
           <img class="w-full hidden lg:block" src="https://i.ibb.co/808PfJx/Group-1741.png" alt="sofas" />
@@ -490,18 +477,16 @@ function App() {
             <div class="px-2 sm:px-4 md:px-0 lg:mt-6 mt-4 md:w-3/4 lg:w-2/5">
               <p class="text-base leading-6 text-center text-white font-normal">We offer premium quality furniture at most affordable prices ever and a huge range of collection to give you most exquisite shopping experience</p>
             </div>
-            <div class="px-4 sm:px-8 md:px-0 mt-16 lg:mt-20 md:px-4 lg:px-0 w-full flex justify-center items-center">
+            <div class="px-4 sm:px-8 md:px-0 mt-16 lg:mt-20 md:px-4  w-full flex justify-center items-center">
               <button class="focus:ring-2 focus:ring-gray-500 hover:text-black hover:bg-gray-200 focus:outline-none rounded-sm transition duration-150 w-full md:w-3/4 lg:w-32 py-4 bg-white flex justify-center items-center text-base font-medium leading-4 text-center text-gray-800">See More</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-
     <!-- CTA II-->
     <!-- NewsLetter II-->
-
-    <div class="mx-auto container flex justify-center items-center 2xl:px-20 px-6 py-12">
+    <div class="mx-auto container flex justify-center items-center px-4 py-12">
       <div class="sm:flex flex-wrap lg:flex-nowrap items-center justify-between w-full">
         <div class="lg:w-1/3">
           <p class="text-2xl font-medium leading-normal text-black pb-5">Luxe newsletter</p>
@@ -546,11 +531,9 @@ function App() {
         </div>
       </div>
     </div>
-
     <!-- NewsLetter II-->
     <!-- Footer III -->
-
-    <div class="2xl:mx-auto 2xl:container lg:px-0 lg:py-16 md:py-12 md:px-6 py-9 px-4">
+    <div class="mx-auto container  lg:py-16 md:py-12 md:px-6 py-9 px-4">
       <div class="py-14 border-b border-t border-gray-200 lg:flex items-center justify-between sm:space-y-10 lg:space-y-0">
         <div class="lg:w-1/2 sm:flex items-start justify-between">
           <div class="md:w-1/2">
@@ -655,9 +638,7 @@ function App() {
         <p class="text-sm text-center text-gray-500 pt-3">© 2021 Luxe Inc. All rights reserved.</p>
       </div>
     </div>
-
-    <!-- Footer III -->
-   `;
+    <!-- Footer III -->`;
     let jsCode = `const toggleSearch = () => {
     document.getElementById("searchInput").classList.toggle('hidden')
 }
@@ -675,7 +656,7 @@ const closeMenu = () => {
       setHtml(htmlCode);
       setJs(jsCode);
     }
-  }, [editor, setHtml,setJs]);
+  }, [editor, setHtml, setJs]);
 
   const handleModeSwitch = () => {
     if (editor === "tailwind") {
