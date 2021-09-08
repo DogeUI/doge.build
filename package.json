@@ -2,6 +2,7 @@
     "name": "doge.build",
     "private": true,
     "dependencies": {
+        "@craco/craco": "^5.8.0",
         "@splitbee/web": "^0.2.4",
         "@testing-library/jest-dom": "^4.2.4",
         "@testing-library/react": "^9.5.0",
@@ -12,13 +13,13 @@
         "react-codemirror2": "^7.2.1",
         "react-dom": "^16.13.1",
         "react-router-dom": "^5.2.0",
-        "react-scripts": "3.4.3",
+        "react-scripts": "^3.4.3",
         "xml-formatter": "^2.4.0"
     },
     "scripts": {
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "react-scripts test",
+        "start": "craco start",
+        "build": "craco build",
+        "test": "craco test",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {
@@ -38,10 +39,11 @@
     },
     "devDependencies": {
         "@prettier/plugin-xml": "^0.13.1",
-        "autoprefixer": "^9.8.6",
+        "autoprefixer": "^9",
+        "postcss": "^7",
         "postcss-cli": "^8.3.1",
         "prettier": "^2.2.1",
         "prettier-plugin-go-template": "0.0.10",
-        "tailwindcss": "^2.0.3"
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat"
     }
 }
